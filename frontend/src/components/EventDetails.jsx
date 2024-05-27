@@ -36,9 +36,7 @@ const EventDetails = () => {
           <p className="text-gray-500">Duration: {event?.duration} hours</p>
           <p className="text-gray-500">Address: {event?.address}</p>
           <p className="text-gray-500">Sponsor: {event?.sponsor_name}</p>
-          {user && (
-            <Link to="/" className="text-orange-700 hover:text-orange-800">Back to Events</Link>
-          )}
+            <Link to="/events" className="text-orange-700 hover:text-orange-800">Back to Events</Link>
         </div>
       )}
     </div>

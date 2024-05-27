@@ -1,10 +1,8 @@
-import React from 'react';
-function DefaultDashboard() {
-
-    return (
-        <>
-        </>
-    );
+import React from "react";
+const DefaultDashboard = () => {
+    return(
+    <>
+    
+    </>)
 }
-
 export default DefaultDashboard;

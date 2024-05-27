@@ -64,7 +64,7 @@ export default function Header() {
                             {/* Conditional links based on user role */}
                             {user && (
                                 <>
-                                    {user.role === 'admin' && (
+                                    {(user.role === 'admin' || user.role === 'organizer')  && (
                                         <li>
                                             <NavLink
                                                 to="/create-event"
@@ -96,22 +96,22 @@ export default function Header() {
                                                     `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                                                 }
                                             >
-                                                Sponsor Dashboard
+                                                Sponsoring
                                             </NavLink>
                                         </li>
                                     )}
-                                    {/* {user.role === 'attendee' && (
+                                    {user.role === 'public-speaker' && (
                                         <li>
                                             <NavLink
-                                                to="/attendee-dashboard"
+                                                to="/public-speaker-dashboard"
                                                 className={({ isActive }) =>
                                                     `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                                                 }
                                             >
-                                                Attendee Dashboard
+                                                Details-for-Speech
                                             </NavLink>
                                         </li>
-                                    )} */}
+                                    )}
                                     <li>
                                         <button
                                             onClick={() => navigate('/profile')} // Assuming you have a profile page

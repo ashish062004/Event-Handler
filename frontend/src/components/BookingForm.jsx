@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { api } from '../api';
 import { useUser } from '../UserContext';
 
-const BookingForm = ({ eventId, onClose }) => {
+const BookingForm = ({ eventId, onClose, ticketPrice}) => {
+  console.log("ticket price ",ticketPrice);
   const { user } = useUser();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -102,11 +103,14 @@ const BookingForm = ({ eventId, onClose }) => {
                       <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="mobileNumber" type="tel" name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} required />
                     </div>
                     <div className="flex items-center justify-between">
-                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                      {!ticketId &&
+                        (<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Book
-                      </button>
+                      </button>)
+                      }
+                      <p>{  }</p>
                       {ticketId && ( // Show download button only if ticketId is available
-                        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleDownloadTicket}>
+                        <button className="bg-green-500 mr-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleDownloadTicket}>
                           Download Ticket
                         </button>
                       )}

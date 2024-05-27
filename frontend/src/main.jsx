@@ -16,6 +16,7 @@ import OrganizerDashboard from './components/OrganizerDashboard';
 import DefaultDashboard from './components/DefaultDashboard';
 import SponsorDashboard from './components/SponsorDashboard';
 import PlaceProviderDashboard from './components/PlaceProviderDashboard';
+import PublicSpeakerDashboard from './components/PublicSpeakerDashboard';
 import Profile from './components/Profile';
 
 
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="default-dashboard" element={<DefaultDashboard />} />
             <Route path="sponsor-dashboard" element={<SponsorDashboard />} />
             <Route path="place-provider-dashboard" element={<PlaceProviderDashboard />} />
+            <Route path="public-speaker-dashboard" element={<PublicSpeakerDashboard />} />
             <Route path="register" element={<RegisterForm />} />
             <Route path="profile" element={<Profile />} />
             <Route path="events" element={<EventList />} />
