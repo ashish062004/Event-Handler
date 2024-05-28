@@ -19,7 +19,7 @@ export default function Header() {
                         <h2>Event-Handler</h2>
                     </Link>
                     <div className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                        <ul className="flex flex-col mt-4 font-medium text-[16px] mb-1 lg:flex-row lg:space-x-8 lg:mt-0 text-center">
                             {/* Common links */}
                             <li>
                                 <NavLink

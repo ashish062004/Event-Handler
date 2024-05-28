@@ -2,12 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql2');
-//const bcrypt = require('bcryptjs');
 const morgan = require('morgan'); // Add logging
 const path = require('path');
 const session = require('express-session');
-// const formidable = require('formidable');
-// const { log } = require('console');
 const { v4: uuidv4 } = require('uuid'); // Import UUID library
 const { createCanvas, loadImage } = require('canvas');
 
@@ -22,7 +19,7 @@ app.use(session({
 app.use(cors());
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Adjust the path as necessary
+app.set('views', path.join(__dirname, 'views'));
 
 // Database connection
 const db = mysql.createConnection({
@@ -220,135 +217,6 @@ app.get('/api/profile/:userId', (req, res) => {
     });
 });
 
-
-// app.get('/api/profile/:userId', (req, res) => {
-//     const userId = req.params.userId;
-//     console.log("in profile userID ", userId);
-//     const sqlAttendee = `
-//     SELECT users.*, bookings.id AS booking_id, events.title AS event_name
-//     FROM users
-//     LEFT JOIN bookings ON users.id = bookings.user_id
-//     LEFT JOIN events ON bookings.event_id = events.id
-//     WHERE users.id = ?
-//     `;
-    
-//     const sqlAdmin = `
-//     SELECT users.*, events.title AS event_name
-//     FROM users
-//     LEFT JOIN events ON events.created_by = users.id
-//     WHERE users.id = ?
-//     `;
-
-//     db.query(sqlAttendee, [userId], (err, result) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).json({ message: 'Error fetching profile', error: err.message });
-//         } else if (result.length > 0) {
-//             const user = {
-//                 id: result[0].id, // Assuming user id is in the result
-//                 fullName: result[0].username, // Adjust based on your user table structure
-//                 email: result[0].email,
-//                 mobileNo: result[0].mobile_no,
-//                 role: result[0].role,
-//                 bookedEvents: result.map(r => ({
-//                     id: r.booking_id, // Assuming booking id is in the result
-//                     event_name: r.event_name,
-//                     ticket_type: r.ticket_type
-//                 })).filter(e => e.event_name)
-//             };
-//             res.json(user);
-//         } else {
-//             // If the user is not found as an attendee, check if they are an admin
-//             db.query(sqlAdmin, [userId], (err, adminResult) => {
-//                 if (err) {
-//                     console.error(err);
-//                     return res.status(500).json({ message: 'Error fetching profile', error: err.message });
-//                 } else if (adminResult.length > 0) {
-//                     const adminUser = {
-//                         id: adminResult[0].id, // Assuming user id is in the result
-//                         fullName: adminResult[0].username, // Adjust based on your user table structure
-//                         email: adminResult[0].email,
-//                         mobileNo: adminResult[0].mobile_no,
-//                         role: adminResult[0].role,
-//                         createdEvents: adminResult.map(r => ({
-//                             event_name: r.event_name
-//                         }))
-//                     };
-//                     res.json(adminUser);
-//                 } else {
-//                     res.status(404).json({ message: 'User not found' });
-//                 }
-//             });
-//         }
-//     });
-// });
-
-// app.get('/api/profile/:userId', (req, res) => {
-//     const userId = req.params.userId;
-//     console.log("in profile userID ", userId);
-
-//     const sqlAttendee = `
-//     SELECT users.*, bookings.id AS booking_id, events.title AS event_name
-//     FROM users
-//     LEFT JOIN bookings ON users.id = bookings.user_id
-//     LEFT JOIN events ON bookings.event_id = events.id
-//     WHERE users.id = ?
-//     `;
-
-//     const sqlAdmin = `
-//     SELECT users.*, events.id AS event_id, events.title AS event_name
-//     FROM users
-//     LEFT JOIN events ON events.organizer_id = users.id
-//     WHERE users.id = ?
-//     `;
-
-//     db.query(sqlAttendee, [userId], (err, result) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).json({ message: 'Error fetching profile', error: err.message });
-//         } else if (result[0].role === 'attendee') {
-//             const user = {
-//                 id: result[0].id,
-//                 fullName: result[0].username,
-//                 email: result[0].email,
-//                 mobileNo: result[0].mobile_no,
-//                 role: result[0].role,
-//                 bookedEvents: result.map(r => ({
-//                     id: r.booking_id,
-//                     event_name: r.event_name,
-//                     ticket_type: r.ticket_type // Assuming you have a ticket_type field in the bookings or related table
-//                 })).filter(e => e.event_name)
-//             };
-//             res.json(user);
-//         } else {
-//             // If the user is not found as an attendee, check if they are an admin
-//             db.query(sqlAdmin, [userId], (err, adminResult) => {
-//                 if (err) {
-//                     console.error(err);
-//                     return res.status(500).json({ message: 'Error fetching profile', error: err.message });
-//                 } else if (adminResult.length > 0) {
-//                     const adminUser = {
-//                         id: adminResult[0].id,
-//                         fullName: adminResult[0].username,
-//                         email: adminResult[0].email,
-//                         mobileNo: adminResult[0].mobile_no,
-//                         role: adminResult[0].role,
-//                         createdEvents: adminResult.map(r => ({
-//                             event_id: r.event_id,
-//                             event_name: r.event_name
-//                         }))
-//                     };
-//                     res.json(adminUser);
-//                 } else {
-//                     res.status(404).json({ message: 'User not found' });
-//                 }
-//             });
-//         }
-//     });
-// });
-
-
-
 app.post('/create-event', (req, res) => {
     console.log(req.body);
     const { title, description, date, time, organizer_id, eventType, duration, address, sponsorName, ticketPrice } = req.body;
@@ -363,10 +231,8 @@ app.post('/create-event', (req, res) => {
         }    });
 });
 
-
 // List Events
 app.get('/events', (req, res) => {
-    // Your existing code for listing events
     const sql = 'SELECT * FROM events';
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -374,11 +240,10 @@ app.get('/events', (req, res) => {
     });
 });
 
-// Modify /book-event endpoint to generate and return a ticket ID
 app.post('/book-event', (req, res) => {
     const { firstName, lastName, email, mobileNumber, user_id, event_id } = req.body;
     // Generate unique ticket ID
-    const ticketId = uuidv4();
+     const ticketId = uuidv4();
 
     // Insert booking
     const bookingSql = 'INSERT INTO bookings (user_id, event_id) VALUES (?, ?)';
@@ -461,49 +326,57 @@ const generateTicketInfo = async (ticketId) => {
 };
  
 const generateTicketImage = async (ticketInfo) => {
-    // Create a new canvas with dimensions for the ticket image
-    const canvas = createCanvas(400, 200);
+    const canvas = createCanvas(700, 200);
     const ctx = canvas.getContext('2d');
-  
-    // Load background image or draw shapes
-    // For demonstration purposes, let's draw a simple ticket shape
-    ctx.fillStyle = 'white'; // Set background color
-    ctx.fillRect(0, 0, canvas.width, canvas.height); // Draw a white background
-  
-    ctx.fillStyle = 'black'; // Set text color
-    ctx.font = 'bold 20px Arial'; // Set font style
-    ctx.fillText('Ticket ID: ' + ticketInfo.ticketId, 20, 40); // Draw ticket ID
-    ctx.fillText('Event Name: ' + ticketInfo.eventName, 20, 80); // Draw event name
-    ctx.fillText('Date: ' + ticketInfo.eventDate, 20, 120); // Draw event date
-    ctx.fillText('Venue: ' + ticketInfo.venue, 20, 160); // Draw venue
-  
+
+    // Fill the background with white color
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Set text properties
+    ctx.fillStyle = 'black';
+    ctx.font = 'bold 20px Arial';
+
+    // Draw the ticket information
+    ctx.fillText('Ticket ID: ' + ticketInfo.ticketId, 20, 40);
+    ctx.fillText('Event Name: ' + ticketInfo.eventName, 20, 80);
+    ctx.fillText('Date: ' + ticketInfo.eventDate, 20, 120);
+    ctx.fillText('Venue: ' + ticketInfo.venue, 20, 160);
+
     // Return the canvas as a base64 encoded PNG image
     return canvas.toDataURL('image/png');
-  };
+};
 
 app.get('/download-ticket/:ticketId', async (req, res) => {
     const ticketId = req.params.ticketId;
-    
+
     try {
-        // Retrieve ticket information asynchronously
         const ticketInfo = await generateTicketInfo(ticketId);
-        console.log("ticket download info ",ticketInfo);
+        console.log("ticket download info", ticketInfo);
         if (!ticketInfo) {
             return res.status(404).send('Ticket not found');
         }
 
-        // Generate ticket image (e.g., using Canvas or an image template) based on ticketInfo
-        const ticketImage = generateTicketImage(ticketInfo);
+        const ticketImage = await generateTicketImage(ticketInfo); // Ensure the function is awaited
+
+        // Remove the data URL prefix to get the raw base64 string
+        const base64Data = ticketImage.replace(/^data:image\/png;base64,/, '');
+
+        // Convert base64 string to buffer
+        const imgBuffer = Buffer.from(base64Data, 'base64');
 
         // Set response headers to indicate image content
         res.set('Content-Type', 'image/png');
-        // Send the ticket image as the response
-        res.send(ticketImage);
+        res.set('Content-Disposition', `attachment; filename="ticket_${ticketId}.png"`);
+
+        // Send the image buffer as the response
+        res.send(imgBuffer);
     } catch (error) {
         console.error('Error generating ticket:', error);
         return res.status(500).send('Internal Server Error');
     }
 });
+
 
 // List Users for Admin/Organizers
 app.get('/admin/users', authenticateSession, authorizeRole('admin'), (req, res) => {
@@ -538,14 +411,6 @@ app.put('/admin/users/:id', authenticateSession, authorizeRole('admin'), (req, r
         if (err) throw err;
         res.send('User updated');
     });
-});
-
-// About Us Endpoint
-app.get('/about-us', (req, res) => {
-    // Your existing code for the About Us endpoint
-    // This could be static content or fetched from a database
-    const aboutUsContent = "Your service or organization's description here.";
-    res.send(aboutUsContent);
 });
 
 app.post('/places', async (req, res) => {

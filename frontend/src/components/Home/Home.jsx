@@ -1,66 +1,40 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import backgroundImage from '../../assets/event.jpg';
+import sideImage from '../../assets/sideImage.jpg';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
-    // <div className="container mx-auto px-4 py-8">
-    //   <Slider {...settings}>
-    //     <div className="px-4">
-    //       <div className="bg-gray-200 rounded-lg p-4">
-    //         <h3 className="text-xl font-semibold mb-2"><img src="" /></h3>
-    //         <p>Content for slide 1</p>
-    //       </div>
-    //     </div>
-    //     <div className="px-4">
-    //       <div className="bg-gray-200 rounded-lg p-4">
-    //         <h3 className="text-xl font-semibold mb-2">Slide 2</h3>
-    //         <p>Content for slide 2</p>
-    //       </div>
-    //     </div>
-    //     <div className="px-4">
-    //       <div className="bg-gray-200 rounded-lg p-4">
-    //         <h3 className="text-xl font-semibold mb-2">Slide 3</h3>
-    //         <p>Content for slide 3</p>
-    //       </div>
-    //     </div>
-    //     {/* Add more slides as needed */}
-    //   </Slider>
-    // </div>
-    <div className="container mx-auto px-4 py-16">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold text-gray-800">Powerful features in a simple dashboard</h1>
-        <p className="text-lg text-gray-600 mt-4">Need to set up recurring events, coupons or custom form? We've got you covered.</p>
-        <button className="bg-orange-700 hover:bg-orange-900 text-white font-bold py-2 px-4 rounded mt-4">
-          Explore Features
-        </button>
+    <>
+      <div
+        className="h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      >
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-black">Event booking made simple</h1>
+          <p className="text-lg text-black mt-4">Start creating event and selling tickets</p>
+          <Link to="/events">
+            <button className="bg-orange-700 hover:bg-orange-900 text-white font-bold py-2 px-4 rounded mt-4">
+              Explore Events
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+      <div className="container mx-auto px-4 py-16 flex flex-wrap lg:flex-nowrap justify-center items-center">
+        <div className="w-full lg:w-1/2 text-center lg:text-left mb-16 lg:mb-0 flex flex-col justify-center items-center">
+          <h1 className="text-3xl font-bold text-gray-800">Powerful features in a simple dashboard</h1>
+          <p className="text-lg text-gray-600 mt-4">Need to set up recurring events, custom form? We've got you covered.</p>
+          <Link to="/events">
+            <button className="bg-orange-700 hover:bg-orange-900 text-white font-bold py-2 px-4 rounded mt-4">
+              Explore Features
+            </button>
+          </Link>
+        </div>
+        <div className="lg:w-1/2 flex justify-center items-center">
+          <img src={sideImage} alt="side-image" className="w-1/2 h-1/2" />
+        </div>
+      </div>
+    </>
   );
 };
 
