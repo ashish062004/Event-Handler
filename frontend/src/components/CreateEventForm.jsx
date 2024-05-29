@@ -27,7 +27,7 @@ const CreateEventForm = () => {
       return;
     }
     try {
-      const response = await api.post('/create-event', {title, description, time, date, organizer_id, eventType, duration, address, sponsorName, ticketPrice});
+      const response = await api.post('/events/create', {title, description, time, date, organizer_id, eventType, duration, address, sponsorName, ticketPrice});
       // Handle event creation success, e.g., redirect
       navigate('/');
       alert('Event created successful!');

@@ -147,7 +147,7 @@ const Profile = () => {
     useEffect(() => {
         const loadUser = async () => {
             try {
-                const res = await api.get(`/api/profile/${user.id}`);
+                const res = await api.get(`users/profile/${user.id}`);
                 setResponse(res.data); // Setting response.data to state
                 console.log("profile response ", res.data);
             } catch (error) {

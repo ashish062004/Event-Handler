@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 
+// Database connection
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -7,6 +8,7 @@ const db = mysql.createConnection({
     database: 'eventHandler'
 });
 
+// Connect to the database
 db.connect(err => {
     if (err) throw err;
     console.log('Connected to the database');

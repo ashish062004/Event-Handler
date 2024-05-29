@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event List</title>
+</head>
+<body>
+    <h1>Event List</h1>
+    <ul>
+        <% events.forEach(event => { %>
+            <li>
+                <h2><%= event.title %></h2>
+                <p>Date: <%= event.date %></p>
+                <p>Address: <%= event.address %></p>
+                <a href="/events/<%= event.id %>">View Details</a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

@@ -5,4 +5,4 @@ function cleanInput(input) {
     return cleanedInput.toLowerCase();
 }
 
-module.exports = cleanInput;
+module.exports = { cleanInput };

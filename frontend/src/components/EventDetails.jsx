@@ -12,7 +12,7 @@ const EventDetails = () => {
  useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await api.get(`/event/${id}`);
+        const response = await api.get(`/events/${id}`);
         console.log("event deatils ", response.data[0]);
         setEvent(response.data[0]);
         console.log("event title ",event.title);

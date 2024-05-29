@@ -20,7 +20,7 @@ const BookingForm = ({ eventId, onClose, ticketPrice}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/book-event', {
+      const response = await api.post('/bookings/book', {
         ...formData,
         user_id: user.id, // Pass user id correctly
         event_id: eventId, // Pass event id from props
@@ -43,7 +43,7 @@ const BookingForm = ({ eventId, onClose, ticketPrice}) => {
     // Make a request to download the ticket image
     console.log("ticket ID ", ticketId);
     try {
-      const response = await api.get(`/download-ticket/${ticketId}`, { responseType: 'blob' });
+      const response = await api.get(`bookings/download-ticket/${ticketId}`, { responseType: 'blob' });
   
       // Create a temporary URL for the blob and trigger a download
       const url = window.URL.createObjectURL(new Blob([response.data]));

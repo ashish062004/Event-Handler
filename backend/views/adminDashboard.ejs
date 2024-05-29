@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Admin Dashboard</h1>
+    <p>Full Name: <%= adminUser.fullName %></p>
+    <p>Email: <%= adminUser.email %></p>
+    <p>Mobile Number: <%= adminUser.mobileNo %></p>
+    <p>Role: <%= adminUser.role %></p>
+    <h2>Created Events</h2>
+    <ul>
+        <% adminUser.createdEvents.forEach(event => { %>
+            <li>
+                <p>Event ID: <%= event.event_id %></p>
+                <p>Event Name: <%= event.event_name %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

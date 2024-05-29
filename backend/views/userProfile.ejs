@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <p>Full Name: <%= user.fullName %></p>
+    <p>Email: <%= user.email %></p>
+    <p>Mobile Number: <%= user.mobileNo %></p>
+    <p>Role: <%= user.role %></p>
+    <h2>Booked Events</h2>
+    <ul>
+        <% user.bookedEvents.forEach(event => { %>
+            <li>
+                <p>Event Name: <%= event.event_name %></p>
+                <p>Ticket Type: <%= event.ticket_type %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Details</title>
+</head>
+<body>
+    <h1><%= event.title %></h1>
+    <p>Description: <%= event.description %></p>
+    <p>Date: <%= event.date %></p>
+    <p>Time: <%= event.time %></p>
+    <p>Duration: <%= event.duration %></p>
+    <p>Address: <%= event.address %></p>
+    <p>Sponsor: <%= event.sponsor_name %></p>
+    <p>Ticket Price: <%= event.ticketPrice %></p>
+    <% if (isAttendee) { %>
+        <form method="post" action="/book-event">
+            <input type="hidden" name="event_id" value="<%= event.id %>">
+            <input type="hidden" name="user_id" value="<%= userId %>">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <br>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="tel" id="mobileNumber" name="mobileNumber" required>
+            <br>
+            <input type="submit" value="Book Event">
+        </form>
+    <% } %>
+</body>
+</html>

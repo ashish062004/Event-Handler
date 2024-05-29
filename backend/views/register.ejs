@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="post" action="/register">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="attendee">Attendee</option>
+            <option value="organizer">Organizer</option>
+            <option value="sponsor">Sponsor</option>
+        </select>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="mobileNo">Mobile Number:</label>
+        <input type="tel" id="mobileNo" name="mobileNo" required>
+        <br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
