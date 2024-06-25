@@ -1,9 +1,7 @@
 const db = require('../config/database');
 
 exports.createEvent = (req, res) => {
-    console.log(req.body);
     const { title, description, date, time, organizer_id, eventType, duration, address, sponsorName, ticketPrice } = req.body;
-    console.log("organizer ID ", organizer_id);
     const sql = 'INSERT INTO events (title, description, date, organizer_id, event_type, duration, address, sponsor_name, time, ticketPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     db.query(sql, [title, description, date, organizer_id, eventType, duration, address, sponsorName, time, ticketPrice], (err, result) => {
         if (err) {

@@ -1,7 +1,6 @@
 const db = require('../config/database');
 
 exports.addPlace = async (req, res) => {
-    console.log("Request received for adding place");
     try {
         const { name, address, size, charge_per_hour, place_provider_id } = req.body;
         // Execute the SQL query to insert a new place into the database

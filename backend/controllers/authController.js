@@ -2,14 +2,9 @@ const { cleanInput } = require('../middleware/utils');
 const db = require('../config/database');
 
 exports.register = (req, res) => {
-    console.log('Received request body:', req.body);
-
     const { username, password, role, email, mobileNo } = req.body;
     // Clean the inputs to remove non-printable characters and convert to lowercase
     const cleanedPassword = cleanInput(password);
-
-    console.log(`Cleaned Password: ${cleanedPassword}`);
-    console.log("registerd role", role);
     // Directly use the role provided by the user
     const mappedRole = role === 'organizer' ? 'admin' : role;
 
@@ -30,50 +25,6 @@ exports.register = (req, res) => {
     });
 };
 
-// exports.login = (req, res) => {
-//     const { username, password } = req.body;
-//     // Check if username exists in database
-//     db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
-//         if (err) {
-//             console.error('Error retrieving user:', err);
-//             res.status(500).send('Error retrieving user');
-//             return;
-//         }
-//         if (results.length === 0) {
-//             // User with provided username not found
-//             res.render('login', { errorMessage: 'Invalid username or password. Please try again.' });
-//             return;
-//         }
-//         // User found, compare passwords
-//         const user = results[0];
-//         console.log("login result ", results);
-//         if (password === user.password) {
-//             // Passwords match, set session and send response
-//             req.session.user = {
-//                 userId: user.id,
-//                 username: user.username,
-//                 role: user.role,
-//                 location: user.location,
-//                 sponsorship_level: user.sponsorship_level
-//             };
-//             console.log("login ", req.session.user);
-//             // Manually set the secure flag based on the deployment environment
-//             const isSecure = process.env.NODE_ENV === 'production'; // Adjust this line based on your deployment environment
-//             // Set secure cookie
-//             res.cookie('user', JSON.stringify(req.session.user), {
-//                 path: '/',
-//                 httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
-//                 secure: isSecure, // Use secure flag based on the deployment environment
-//                 sameSite: 'strict' // Prevent the cookie from being sent with cross-site requests
-//             });
-//             res.status(200).send({ message: 'User login', userId: user.id, role: user.role });
-//         } else {
-//             // Passwords don't match
-//             res.render('login', { errorMessage: 'Invalid username or password. Please try again.' });
-//         }
-//     });
-// };
-
 exports.login = (req, res) => {
     const { username, password } = req.body;
     db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
@@ -87,7 +38,7 @@ exports.login = (req, res) => {
             return;
         }
         const user = results[0];
-        if (password === user.password) {
+        if(password === user.password){
             req.session.user = {
                 userId: user.id,
                 username: user.username,
@@ -102,7 +53,7 @@ exports.login = (req, res) => {
             });
             res.status(200).send({ message: 'User login', userId: user.id, role: user.role });
         } else {
-            res.render('login', { errorMessage: 'Invalid username or password. Please try again.' });
+            res.status(401).send({ message: 'Invalid username or password. Please try again.' });
         }
     });
 };

@@ -2,8 +2,6 @@ const db = require('../config/database');
 
 exports.getUserProfile = (req, res) => {
     const userId = req.params.userId;
-    console.log("in profile userID ", userId);
-
     const sqlUser = `
     SELECT id, username, email, mobile_no, role FROM users WHERE id = ?
     `;

@@ -35,7 +35,6 @@ exports.downloadTicket = async (req, res) => {
 
     try {
         const ticketInfo = await generateTicketInfo(ticketId);
-        console.log("ticket download info", ticketInfo);
         if (!ticketInfo) {
             return res.status(404).send('Ticket not found');
         }

@@ -114,7 +114,7 @@ const EventList = () => {
               className="w-full h-48 object-cover rounded-t-lg"
             />
             <h2 className="text-xl font-bold mb-2">{event.title}</h2>
-            <p className="text-gray-700 mb-2">{event.description}</p>
+            {/* <p className="text-gray-700 mb-2">{event.description}</p> */}
             <p className="text-gray-500">{event.date}</p>
             <p className="text-gray-500">{event.address}</p>
             <p className="text-gray-700 mb-2">Ticket Price: ₹{event.ticketPrice}</p>

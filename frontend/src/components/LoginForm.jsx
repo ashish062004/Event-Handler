@@ -14,6 +14,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await api.post('/auth/login', { username, password });
+      console.log("login response ", response.data);
       const { userId, role } = response.data; // Adjusted to match the backend response
       localStorage.setItem('token', response.data.token); // Assuming the token is returned in the response
       setAuthToken(response.data.token); // Set the auth token
